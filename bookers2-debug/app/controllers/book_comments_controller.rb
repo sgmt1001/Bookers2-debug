@@ -10,7 +10,7 @@ class BookCommentsController < ApplicationController
     if comment.save
       redirect_to book_path(book)
     else
-      redirect_to books_path
+      redirect_to book_path(book) ,notice: "コメントを入力してください"
     end
   end
 
