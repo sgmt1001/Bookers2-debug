@@ -20,14 +20,28 @@ class SearchsController < ApplicationController
       # 選択した検索方法がが完全一致だったら
       if method == 'perfect'
         User.where(name: content)
+      # 選択した検索方法が前方一致だったら
+      elsif method == 'forward'
+        User.where('name LIKE ?', content+'%')
+      # 選択した検索方法が後方一致だったら
+      elsif method == 'back'
+        User.where('name LIKE ?', '%'+content)
       # 選択した検索方法がが部分一致だったら
       else
         User.where('name LIKE ?', '%'+content+'%')
       end
     # 選択したモデルがpostだったら
     elsif model == 'book'
+      # 選択した検索方法がが完全一致だったら
       if method == 'perfect'
         Book.where(title: content)
+      # 選択した検索方法が前方一致だったら
+      elsif method == 'forward'
+        Book.where('title LIKE ?', content+'%')
+      # 選択した検索方法が後方一致だったら
+      elsif method == 'back'
+        Book.where('title LIKE ?', '%'+content)
+      # 選択した検索方法がが部分一致だったら
       else
         Book.where('title LIKE ?', '%'+content+'%')
       end
